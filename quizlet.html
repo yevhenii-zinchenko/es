@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Испанские слова — карточки</title>
+<title>Іспанські слова — картки</title>
 <style>
 /* =========================================================================
-   ИСПАНСКИЕ СЛОВА — стили
-   Палитра навеяна андалузской плиткой (азулежу): глубокий тил + подсолнух +
-   терракота. Карточка стилизована как керамическая плитка/открытка.
+   ІСПАНСЬКІ СЛОВА — стилі
+   Палітра натхнена андалузькою плиткою (азулежу): глибокий тіл + соняшник +
+   теракота. Картка стилізована як керамічна плитка/листівка.
    ========================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
@@ -197,7 +197,7 @@ body { min-height: 100vh; }
 
 .fav-toggle { cursor: pointer; font-size: 1.1rem; background: none; border: none; color: var(--gold); padding: 0; }
 
-/* Бейдж статуса — кликабельный: переключает «изучено / не изучено». */
+/* Бейдж статусу — клікабельний: перемикає «вивчено / не вивчено». */
 .badge {
   display: inline-block;
   padding: 3px 10px;
@@ -397,7 +397,7 @@ body { min-height: 100vh; }
   font-size: 0.92rem;
 }
 .result-list li .es { font-weight: 600; }
-.result-list li .ru { color: var(--text-muted); text-align: right; }
+.result-list li .uk { color: var(--text-muted); text-align: right; }
 .result-empty { padding: 14px 16px; color: var(--text-muted); font-size: 0.9rem; }
 
 @media (max-width: 480px) {
@@ -417,27 +417,27 @@ body { min-height: 100vh; }
 <div class="app">
 
   <header class="header">
-    <h1 class="logo">🇪🇸 Испанские слова</h1>
+    <h1 class="logo">🇪🇸 Іспанські слова</h1>
     <div class="header-controls">
-      <button id="directionToggle" class="btn btn-ghost" title="Направление перевода">ES → RU</button>
-      <button id="themeToggle" class="btn btn-icon" title="Тёмная тема">🌙</button>
+      <button id="directionToggle" class="btn btn-ghost" title="Напрямок перекладу">ES → UA</button>
+      <button id="themeToggle" class="btn btn-icon" title="Темна тема">🌙</button>
     </div>
   </header>
 
   <nav class="tabs">
-    <button class="tab-btn active" data-tab="cards">Карточки</button>
-    <button class="tab-btn" data-tab="list">Список слов</button>
+    <button class="tab-btn active" data-tab="cards">Картки</button>
+    <button class="tab-btn" data-tab="list">Список слів</button>
   </nav>
 
   <section id="tab-list" class="tab-content">
     <div class="list-toolbar">
-      <input type="text" id="searchInput" class="input" placeholder="🔍 Поиск слова...">
+      <input type="text" id="searchInput" class="input" placeholder="🔍 Пошук слова...">
       <span id="wordCount" class="word-count"></span>
     </div>
     <div class="table-wrapper">
       <table class="word-table">
         <thead>
-          <tr><th></th><th>Испанский</th><th>Русский</th><th>Статус</th></tr>
+          <tr><th></th><th>Іспанська</th><th>Українська</th><th>Статус</th></tr>
         </thead>
         <tbody id="wordTableBody"></tbody>
       </table>
@@ -447,28 +447,28 @@ body { min-height: 100vh; }
   <section id="tab-cards" class="tab-content active">
 
     <div id="setupScreen" class="screen active">
-      <h2 class="screen-title">Настройка сессии</h2>
+      <h2 class="screen-title">Налаштування сесії</h2>
 
-      <p class="setup-label">Сколько слов изучать?</p>
+      <p class="setup-label">Скільки слів вивчати?</p>
       <div class="size-options" id="sizeOptions">
         <button class="size-btn" data-size="20">20</button>
         <button class="size-btn" data-size="30">30</button>
         <button class="size-btn" data-size="40">40</button>
         <button class="size-btn" data-size="50">50</button>
-        <button class="size-btn" data-size="all">Все</button>
+        <button class="size-btn" data-size="all">Усі</button>
       </div>
 
       <label class="checkbox-row">
         <input type="checkbox" id="favoritesOnly">
-        <span>Учить только избранные ⭐ (<span id="favCount">0</span>)</span>
+        <span>Вчити лише вибрані ⭐ (<span id="favCount">0</span>)</span>
       </label>
 
       <label class="checkbox-row">
         <input type="checkbox" id="shuffleOnStart" checked>
-        <span>Перемешать слова</span>
+        <span>Перемішати слова</span>
       </label>
 
-      <button id="startSessionBtn" class="btn btn-primary btn-lg">Начать обучение</button>
+      <button id="startSessionBtn" class="btn btn-primary btn-lg">Почати навчання</button>
     </div>
 
     <div id="studyScreen" class="screen">
@@ -484,14 +484,14 @@ body { min-height: 100vh; }
         <div id="flashcard" class="flashcard">
           <div class="flashcard-inner">
             <div class="flashcard-face flashcard-front">
-              <button class="fav-star" id="favStar" title="В избранное">☆</button>
+              <button class="fav-star" id="favStar" title="До вибраних">☆</button>
               <span id="frontText" class="card-word"></span>
-              <span class="flip-hint">нажмите или пробел, чтобы перевернуть</span>
+              <span class="flip-hint">натисніть або пробіл, щоб перевернути</span>
             </div>
             <div class="flashcard-face flashcard-back">
-              <button class="fav-star" id="favStarBack" title="В избранное">☆</button>
+              <button class="fav-star" id="favStarBack" title="До вибраних">☆</button>
               <span id="backText" class="card-word"></span>
-              <span class="flip-hint">нажмите, чтобы перевернуть обратно</span>
+              <span class="flip-hint">натисніть, щоб перевернути назад</span>
             </div>
           </div>
         </div>
@@ -503,22 +503,22 @@ body { min-height: 100vh; }
       </div>
 
       <div class="study-toolbar">
-        <button id="shuffleBtn" class="btn btn-ghost">🔀 Перемешать</button>
-        <button id="stopBtn" class="btn btn-ghost">⏹ Остановить</button>
+        <button id="shuffleBtn" class="btn btn-ghost">🔀 Перемішати</button>
+        <button id="stopBtn" class="btn btn-ghost">⏹ Зупинити</button>
       </div>
 
-      <p class="keyboard-hint">⌨️ ← Не знаю&nbsp;&nbsp;|&nbsp;&nbsp;Пробел — перевернуть&nbsp;&nbsp;|&nbsp;&nbsp;→ Знаю</p>
+      <p class="keyboard-hint">⌨️ ← Не знаю&nbsp;&nbsp;|&nbsp;&nbsp;Пробіл — перевернути&nbsp;&nbsp;|&nbsp;&nbsp;→ Знаю</p>
     </div>
 
     <div id="roundScreen" class="screen">
-      <h2 class="screen-title" id="roundTitle">Круг завершён</h2>
+      <h2 class="screen-title" id="roundTitle">Коло завершено</h2>
       <p class="round-note" id="roundNote"></p>
 
       <div class="stats-grid">
-        <div class="stat-card"><span class="stat-value" id="statRoundTotal">0</span><span class="stat-label">слов в круге</span></div>
+        <div class="stat-card"><span class="stat-value" id="statRoundTotal">0</span><span class="stat-label">слів у колі</span></div>
         <div class="stat-card"><span class="stat-value is-green" id="statKnow">0</span><span class="stat-label">знаю</span></div>
         <div class="stat-card"><span class="stat-value is-red" id="statDontKnow">0</span><span class="stat-label">не знаю</span></div>
-        <div class="stat-card"><span class="stat-value" id="statTime">0:00</span><span class="stat-label">время обучения</span></div>
+        <div class="stat-card"><span class="stat-value" id="statTime">0:00</span><span class="stat-label">час навчання</span></div>
       </div>
 
       <div class="result-groups">
@@ -527,15 +527,15 @@ body { min-height: 100vh; }
           <ul class="result-list" id="knownList"></ul>
         </div>
         <div class="result-group unknown">
-          <div class="result-group-header"><span>✕ Не знаю — идут в следующий круг</span><span class="count" id="unknownCount">0</span></div>
+          <div class="result-group-header"><span>✕ Не знаю — ідуть у наступне коло</span><span class="count" id="unknownCount">0</span></div>
           <ul class="result-list" id="unknownList"></ul>
         </div>
       </div>
 
       <div class="stats-buttons">
-        <button id="continueRoundBtn" class="btn btn-primary">▶ Продолжить изучение</button>
-        <button id="newRoundBtn" class="btn btn-secondary">🔁 Начать новый круг</button>
-        <button id="exitStudyBtn" class="btn btn-ghost">✕ Закрыть</button>
+        <button id="continueRoundBtn" class="btn btn-primary">▶ Продовжити вивчення</button>
+        <button id="newRoundBtn" class="btn btn-secondary">🔁 Почати нове коло</button>
+        <button id="exitStudyBtn" class="btn btn-ghost">✕ Закрити</button>
       </div>
     </div>
 
@@ -545,231 +545,231 @@ body { min-height: 100vh; }
 
 <script>
 /* =========================================================================
-   ИСПАНСКИЕ СЛОВА — логика приложения
+   ІСПАНСЬКІ СЛОВА — логіка застосунку
    ========================================================================= */
 
 /* ---------------------------------------------------------------------
-   0. СЛОВАРЬ (замените этот массив своим списком слов)
-   Формат каждого элемента: { es: "испанское слово", ru: "русский перевод" }
+   0. СЛОВНИК (замініть цей масив своїм списком слів)
+   Формат кожного елемента: { es: "іспанське слово", uk: "український переклад" }
    --------------------------------------------------------------------- */
 const WORDS_DATA = [
-  { "es": "pasar un rato divertido", "ru": "весело провести время" },
-  { "es": "echar una mano", "ru": "протягивать руку помощи" },
-  { "es": "atrévete", "ru": "попробуйте" },
-  { "es": "recorrer", "ru": "пройти; проехать; преодолевать" },
-  { "es": "vergüenza", "ru": "стыд" },
-  { "es": "complejos", "ru": "комплексы" },
-  { "es": "es lo que se lleva ahora", "ru": "Это сейчас модно." },
-  { "es": "nuestro ritmo es frenético", "ru": "бешеный ритм" },
-  { "es": "apuntarse", "ru": "записываться, присоединяться к плану или группе" },
-  { "es": "de repente", "ru": "внезапно" },
-  { "es": "aislamiento", "ru": "изоляция" },
-  { "es": "hay muchas maneras de + infinitivo", "ru": "есть много способов" },
-  { "es": "ponerle un poco de ganas", "ru": "приложить немного усилий" },
-  { "es": "atreverse a", "ru": "осмелиться, решиться" },
-  { "es": "tener miedo a", "ru": "бояться чего-либо" },
-  { "es": "tener miedo de", "ru": "бояться сделать что-либо" },
-  { "es": "sentirse poderoso", "ru": "чувствовать себя сильным" },
-  { "es": "vencer tus miedos", "ru": "победить свои страхи" },
-  { "es": "fijar nuevas metas y lograr superarlas", "ru": "ставить новые цели и достигать их" },
-  { "es": "Pues yo no lo veo así", "ru": "Я так не считаю" },
-  { "es": "valiente", "ru": "смелый" },
-  { "es": "valentía", "ru": "смелость" },
-  { "es": "era una verdadera pasada", "ru": "Это было просто потрясающе" },
-  { "es": "animarse", "ru": "осмелиться, решиться" },
-  { "es": "muy facilón", "ru": "слишком простой" },
-  { "es": "hacer daño", "ru": "причинять вред" },
-  { "es": "menuda estafa", "ru": "Вот это обман" },
-  { "es": "merecer la pena", "ru": "стоить того" },
-  { "es": "aprovechar", "ru": "использовать, воспользоваться" },
-  { "es": "mancharse", "ru": "испачкаться" },
-  { "es": "pedalear", "ru": "крутить педали, ехать на велосипеде" },
-  { "es": "emprender acciones", "ru": "принять меры" },
-  { "es": "mostrar este hilo", "ru": "Показать эту ветку" },
-  { "es": "No hay nada más atrevido que la ignorancia", "ru": "Нет ничего более дерзкого, чем невежество" },
-  { "es": "atrevido", "ru": "нахальный, самоуверенный, дерзкий" },
-  { "es": "imprudencia", "ru": "неосторожность, безрассудство" },
-  { "es": "prudencia", "ru": "осторожность, благоразумие" },
-  { "es": "temerario", "ru": "безрассудный, отчаянный" },
-  { "es": "precavido", "ru": "предусмотрительный, осторожный" },
-  { "es": "sensatez", "ru": "здравый смысл, благоразумие" },
-  { "es": "tomar una decisión", "ru": "принять решение" },
-  { "es": "tomar precauciones", "ru": "принять меры предосторожности" },
-  { "es": "coincidís", "ru": "согласны?" },
-  { "es": "el culpable", "ru": "виновный, виновник" },
-  { "es": "instintos innatos", "ru": "врождённые инстинкты" },
-  { "es": "antecesores", "ru": "предки" },
-  { "es": "predadores", "ru": "хищники" },
-  { "es": "las inclemencias del tiempo", "ru": "суровые погодные условия" },
-  { "es": "los sentidos captan el foco del peligro", "ru": "органы чувств улавливают источник опасности" },
-  { "es": "lucha y huida", "ru": "борьба и бегство (реакция «бей или беги»)" },
-  { "es": "la noción de la magnitud", "ru": "представление о величине, понимание масштаба" },
-  { "es": "aviso, advertencia, amenaza", "ru": "предупреждение, угроза" },
-  { "es": "patrón, comportamiento, conducta", "ru": "модель поведения" },
-  { "es": "espanto, pánico, terror", "ru": "ужас, паника, террор" },
-  { "es": "pacto, acuerdo, compromiso", "ru": "соглашение, договор, обязательство" },
-  { "es": "dureza, crudeza, inclemencia", "ru": "суровость" },
-  { "es": "pelea, revuelta, lucha", "ru": "драка, восстание, борьба" },
-  { "es": "salvar, defender, proteger", "ru": "спасать, защищать, оберегать" },
-  { "es": "decepción, revés, fracaso", "ru": "разочарование, неудача, провал" },
-  { "es": "intuición, impulso, instinto", "ru": "интуиция, импульс, инстинкт" },
+  { "es": "pasar un rato divertido", "uk": "весело провести час" },
+  { "es": "echar una mano", "uk": "простягнути руку допомоги" },
+  { "es": "atrévete", "uk": "спробуй; наважся" },
+  { "es": "recorrer", "uk": "пройти; проїхати; долати" },
+  { "es": "vergüenza", "uk": "сором" },
+  { "es": "complejos", "uk": "комплекси" },
+  { "es": "es lo que se lleva ahora", "uk": "Це зараз модно." },
+  { "es": "nuestro ritmo es frenético", "uk": "у нас шалений ритм" },
+  { "es": "apuntarse", "uk": "записуватися, приєднуватися до плану або групи" },
+  { "es": "de repente", "uk": "раптово" },
+  { "es": "aislamiento", "uk": "ізоляція" },
+  { "es": "hay muchas maneras de + infinitivo", "uk": "є багато способів" },
+  { "es": "ponerle un poco de ganas", "uk": "докласти трохи старання" },
+  { "es": "atreverse a", "uk": "осмілитися, наважитися" },
+  { "es": "tener miedo a", "uk": "боятися чогось" },
+  { "es": "tener miedo de", "uk": "боятися зробити щось" },
+  { "es": "sentirse poderoso", "uk": "почуватися сильним" },
+  { "es": "vencer tus miedos", "uk": "перемогти свої страхи" },
+  { "es": "fijar nuevas metas y lograr superarlas", "uk": "ставити нові цілі й досягати їх" },
+  { "es": "Pues yo no lo veo así", "uk": "Я так не вважаю" },
+  { "es": "valiente", "uk": "смілий; відважний" },
+  { "es": "valentía", "uk": "смілість; відвага" },
+  { "es": "era una verdadera pasada", "uk": "Це було просто неймовірно" },
+  { "es": "animarse", "uk": "наважитися, зважитися" },
+  { "es": "muy facilón", "uk": "надто простий" },
+  { "es": "hacer daño", "uk": "завдавати шкоди" },
+  { "es": "menuda estafa", "uk": "Ото шахрайство" },
+  { "es": "merecer la pena", "uk": "бути того вартим" },
+  { "es": "aprovechar", "uk": "використати, скористатися" },
+  { "es": "mancharse", "uk": "забруднитися" },
+  { "es": "pedalear", "uk": "крутити педалі, їхати на велосипеді" },
+  { "es": "emprender acciones", "uk": "вжити заходів" },
+  { "es": "mostrar este hilo", "uk": "Показати цю гілку" },
+  { "es": "No hay nada más atrevido que la ignorancia", "uk": "Немає нічого дерзкішого за невігластво" },
+  { "es": "atrevido", "uk": "нахабний, самовпевнений, дерзкий" },
+  { "es": "imprudencia", "uk": "необережність, необачність" },
+  { "es": "prudencia", "uk": "обережність, розсудливість" },
+  { "es": "temerario", "uk": "безрозсудний, відчайдушний" },
+  { "es": "precavido", "uk": "передбачливий, обережний" },
+  { "es": "sensatez", "uk": "здоровий глузд, розсудливість" },
+  { "es": "tomar una decisión", "uk": "ухвалити рішення" },
+  { "es": "tomar precauciones", "uk": "вжити застережних заходів" },
+  { "es": "coincidís", "uk": "погоджуєтесь?" },
+  { "es": "el culpable", "uk": "винний, винуватець" },
+  { "es": "instintos innatos", "uk": "вроджені інстинкти" },
+  { "es": "antecesores", "uk": "предки" },
+  { "es": "predadores", "uk": "хижаки" },
+  { "es": "las inclemencias del tiempo", "uk": "сувора погода, непогода" },
+  { "es": "los sentidos captan el foco del peligro", "uk": "органи чуття вловлюють джерело небезпеки" },
+  { "es": "lucha y huida", "uk": "боротьба і втеча (реакція «бий або тікай»)" },
+  { "es": "la noción de la magnitud", "uk": "уявлення про величину, розуміння масштабу" },
+  { "es": "aviso, advertencia, amenaza", "uk": "попередження, застереження, погроза" },
+  { "es": "patrón, comportamiento, conducta", "uk": "модель поведінки" },
+  { "es": "espanto, pánico, terror", "uk": "жах, паніка, терор" },
+  { "es": "pacto, acuerdo, compromiso", "uk": "угода, договір, зобов'язання" },
+  { "es": "dureza, crudeza, inclemencia", "uk": "суворість" },
+  { "es": "pelea, revuelta, lucha", "uk": "бійка, повстання, боротьба" },
+  { "es": "salvar, defender, proteger", "uk": "рятувати, захищати, оберігати" },
+  { "es": "decepción, revés, fracaso", "uk": "розчарування, невдача, провал" },
+  { "es": "intuición, impulso, instinto", "uk": "інтуїція, імпульс, інстинкт" },
 
-  { "es": "terremoto", "ru": "землетрясение" },
-  { "es": "ser una lata", "ru": "быть скучным, надоедливым; быть настоящей морокой" },
-  { "es": "atrapar", "ru": "ловить; поймать; застать" },
-  { "es": "almacenes", "ru": "склады; универмаги" },
-  { "es": "agotado", "ru": "измотанный, уставший; распроданный" },
-  { "es": "ser insoportable", "ru": "быть невыносимым" },
-  { "es": "alucinante", "ru": "потрясающий, невероятный, поразительный" },
-  { "es": "que nos acompleja", "ru": "что заставляет нас комплексовать" },
-  { "es": "los complejos", "ru": "комплексы" },
-  { "es": "la propia grandeza", "ru": "собственное величие, собственная значимость" },
-  { "es": "se planteó", "ru": "задумался; поставил перед собой цель" },
-  { "es": "cumplir una misión", "ru": "выполнить миссию" },
-  { "es": "la fuga", "ru": "бегство; побег" },
-  { "es": "sentirse fascinado/a", "ru": "быть очарованным, восхищаться" },
-  { "es": "momentos cumbre", "ru": "кульминационные моменты, лучшие моменты" },
-  { "es": "nos inquietamos", "ru": "мы тревожимся, беспокоимся" },
-  { "es": "la debilidad", "ru": "слабость" },
-  { "es": "de hecho", "ru": "на самом деле; фактически" },
-  { "es": "quedarse anclado/a", "ru": "застрять, не двигаться вперёд" },
-  { "es": "anhelos", "ru": "заветные мечты, сильные желания" },
-  { "es": "deseos incumplidos", "ru": "несбывшиеся желания" },
-  { "es": "apostar", "ru": "делать ставку; выбирать; решаться" },
-  { "es": "el alejamiento social", "ru": "социальная изоляция, отдаление от общества" },
-  { "es": "acudir a", "ru": "приходить; обращаться" },
-  { "es": "favorecer", "ru": "способствовать; помогать" },
-  { "es": "zona de confort", "ru": "зона комфорта" },
-  { "es": "marcar la vida", "ru": "оставить след в жизни; изменить жизнь" },
-  { "es": "montar una empresa", "ru": "открыть, основать компанию или бизнес" },
+  { "es": "terremoto", "uk": "землетрус" },
+  { "es": "ser una lata", "uk": "бути нудним, надокучливим; бути справжньою морокою" },
+  { "es": "atrapar", "uk": "ловити; зловити; застати" },
+  { "es": "almacenes", "uk": "склади; універмаги" },
+  { "es": "agotado", "uk": "вимотаний, втомлений; розпроданий" },
+  { "es": "ser insoportable", "uk": "бути нестерпним" },
+  { "es": "alucinante", "uk": "приголомшливий, неймовірний, дивовижний" },
+  { "es": "que nos acompleja", "uk": "що змушує нас комплексувати" },
+  { "es": "los complejos", "uk": "комплекси" },
+  { "es": "la propia grandeza", "uk": "власна велич, власна значущість" },
+  { "es": "se planteó", "uk": "задумався; поставив собі за мету" },
+  { "es": "cumplir una misión", "uk": "виконати місію" },
+  { "es": "la fuga", "uk": "втеча" },
+  { "es": "sentirse fascinado/a", "uk": "бути зачарованим, захоплюватися" },
+  { "es": "momentos cumbre", "uk": "кульмінаційні моменти, найкращі моменти" },
+  { "es": "nos inquietamos", "uk": "ми тривожимося, хвилюємося" },
+  { "es": "la debilidad", "uk": "слабкість" },
+  { "es": "de hecho", "uk": "насправді; фактично" },
+  { "es": "quedarse anclado/a", "uk": "застрягнути, не рухатися вперед" },
+  { "es": "anhelos", "uk": "заповітні мрії, сильні бажання" },
+  { "es": "deseos incumplidos", "uk": "нездійснені бажання" },
+  { "es": "apostar", "uk": "робити ставку; обирати; наважуватися" },
+  { "es": "el alejamiento social", "uk": "соціальна ізоляція, віддалення від суспільства" },
+  { "es": "acudir a", "uk": "приходити; звертатися" },
+  { "es": "favorecer", "uk": "сприяти; допомагати" },
+  { "es": "zona de confort", "uk": "зона комфорту" },
+  { "es": "marcar la vida", "uk": "залишити слід у житті; змінити життя" },
+  { "es": "montar una empresa", "uk": "відкрити, заснувати компанію або бізнес" },
 
-  { "es": "la debilidad", "ru": "слабость" },
-  { "es": "debilitado", "ru": "ослабленный" },
-  { "es": "debilitar", "ru": "ослаблять" },
+  { "es": "la debilidad", "uk": "слабкість" },
+  { "es": "debilitado", "uk": "ослаблений" },
+  { "es": "debilitar", "uk": "ослаблювати" },
 
-  { "es": "la conexión", "ru": "связь" },
-  { "es": "conectado", "ru": "связанный, подключённый" },
-  { "es": "conectar", "ru": "соединять, подключать" },
+  { "es": "la conexión", "uk": "зв'язок" },
+  { "es": "conectado", "uk": "пов'язаний, підключений" },
+  { "es": "conectar", "uk": "з'єднувати, підключати" },
 
-  { "es": "el anclaje", "ru": "якорь, закрепление" },
-  { "es": "anclado", "ru": "закреплённый, застрявший" },
-  { "es": "anclar", "ru": "закреплять" },
+  { "es": "el anclaje", "uk": "якір, закріплення" },
+  { "es": "anclado", "uk": "закріплений, застряглий" },
+  { "es": "anclar", "uk": "закріплювати" },
 
-  { "es": "la posibilidad", "ru": "возможность" },
-  { "es": "posible", "ru": "возможный" },
-  { "es": "posibilitar", "ru": "делать возможным" },
+  { "es": "la posibilidad", "uk": "можливість" },
+  { "es": "posible", "uk": "можливий" },
+  { "es": "posibilitar", "uk": "робити можливим" },
 
-  { "es": "crecimiento", "ru": "рост" },
-  { "es": "crecido", "ru": "выросший" },
-  { "es": "crecer", "ru": "расти" },
+  { "es": "crecimiento", "uk": "зростання" },
+  { "es": "crecido", "uk": "вирослий" },
+  { "es": "crecer", "uk": "рости" },
 
-  { "es": "el complejo", "ru": "комплекс" },
-  { "es": "acomplejado", "ru": "закомплексованный" },
-  { "es": "acomplejar", "ru": "вызывать комплексы" },
+  { "es": "el complejo", "uk": "комплекс" },
+  { "es": "acomplejado", "uk": "закомплексований" },
+  { "es": "acomplejar", "uk": "викликати комплекси" },
 
-  { "es": "pérdida", "ru": "потеря" },
-  { "es": "perdido", "ru": "потерянный" },
-  { "es": "perder", "ru": "терять" },
+  { "es": "pérdida", "uk": "втрата" },
+  { "es": "perdido", "uk": "втрачений" },
+  { "es": "perder", "uk": "втрачати" },
 
-  { "es": "el anhelo", "ru": "мечта, стремление" },
-  { "es": "anhelado", "ru": "желанный" },
-  { "es": "anhelar", "ru": "страстно желать" },
+  { "es": "el anhelo", "uk": "мрія, прагнення" },
+  { "es": "anhelado", "uk": "жаданий" },
+  { "es": "anhelar", "uk": "палко бажати" },
 
-  { "es": "la fuga", "ru": "побег" },
-  { "es": "fugado", "ru": "сбежавший" },
-  { "es": "fugarse", "ru": "сбежать" },
+  { "es": "la fuga", "uk": "втеча" },
+  { "es": "fugado", "uk": "той, що втік; втікач" },
+  { "es": "fugarse", "uk": "втекти" },
 
-  { "es": "cumplimiento", "ru": "выполнение" },
-  { "es": "cumplido", "ru": "выполненный" },
-  { "es": "cumplir", "ru": "выполнять" },
+  { "es": "cumplimiento", "uk": "виконання" },
+  { "es": "cumplido", "uk": "виконаний" },
+  { "es": "cumplir", "uk": "виконувати" },
 
-  { "es": "la ansiedad", "ru": "тревожность" },
-  { "es": "ansioso", "ru": "тревожный" },
-  { "es": "ansiar", "ru": "страстно желать" },
-  { "es": "retos", "ru": "вызовы; трудные задачи" },
-  { "es": "logros", "ru": "достижения" },
-  { "es": "sucedió", "ru": "произошло" },
-  { "es": "hazaña", "ru": "подвиг; выдающееся достижение" },
-  { "es": "transmitir", "ru": "передавать (информацию, чувства, сигнал)" },
-  { "es": "temeridad", "ru": "безрассудство; опрометчивость" },
-  { "es": "sensatez", "ru": "благоразумие; здравомыслие" },
-  { "es": "liderazgo", "ru": "лидерство" },
-  { "es": "determinación", "ru": "решимость; целеустремлённость" },
-  { "es": "imprudencia", "ru": "неосторожность; безрассудство" },
-  { "es": "desafío", "ru": "вызов; испытание" },
-  { "es": "avalancha", "ru": "лавина; поток; шквал" },
+  { "es": "la ansiedad", "uk": "тривожність" },
+  { "es": "ansioso", "uk": "тривожний" },
+  { "es": "ansiar", "uk": "палко бажати" },
+  { "es": "retos", "uk": "виклики; складні задачі" },
+  { "es": "logros", "uk": "досягнення" },
+  { "es": "sucedió", "uk": "сталося" },
+  { "es": "hazaña", "uk": "подвиг; видатне досягнення" },
+  { "es": "transmitir", "uk": "передавати (інформацію, почуття, сигнал)" },
+  { "es": "temeridad", "uk": "безрозсудність; необачність" },
+  { "es": "sensatez", "uk": "розсудливість; здоровий глузд" },
+  { "es": "liderazgo", "uk": "лідерство" },
+  { "es": "determinación", "uk": "рішучість; цілеспрямованість" },
+  { "es": "imprudencia", "uk": "необережність; безрозсудність" },
+  { "es": "desafío", "uk": "виклик; випробування" },
+  { "es": "avalancha", "uk": "лавина; потік; шквал" },
 
-  { "es": "nunca se rindan", "ru": "Никогда не сдавайтесь" },
-  { "es": "ascender", "ru": "подниматься; восходить; повышаться (в должности)" },
-  { "es": "alcanzar las cimas", "ru": "достигать вершин" },
-  { "es": "quedaron sepultadas", "ru": "оказались погребены; были засыпаны" },
-  { "es": "apuntarse", "ru": "записаться; зарегистрироваться; присоединиться" },
+  { "es": "nunca se rindan", "uk": "Ніколи не здавайтеся" },
+  { "es": "ascender", "uk": "підніматися; сходити; підвищуватися (на посаді)" },
+  { "es": "alcanzar las cimas", "uk": "досягати вершин" },
+  { "es": "quedaron sepultadas", "uk": "були похованими; їх засипало" },
+  { "es": "apuntarse", "uk": "записатися; зареєструватися; приєднатися" },
 
-  { "es": "proeza", "ru": "подвиг; выдающееся достижение" },
-  { "es": "precursora", "ru": "предшественница; первопроходец" },
-  { "es": "haber estado oculto bajo la sombra", "ru": "быть скрытым в тени; оставаться в тени" },
-  { "es": "vencedores", "ru": "победители" },
-  { "es": "vencidos", "ru": "побеждённые" },
-  { "es": "rompedoras", "ru": "новаторский; революционный; ломающий стереотипы" },
-  { "es": "apasionadas", "ru": "увлечённый; страстный" },
-  { "es": "apasionantes", "ru": "захватывающий; увлекательный" },
-  { "es": "ludópata", "ru": "игроман; человек, страдающий игровой зависимостью" },
-  { "es": "la monja alférez", "ru": "«монахиня-прапорщик»" },
-  { "es": "escapar", "ru": "убегать; спасаться; сбегать" },
-  { "es": "a pesar de que", "ru": "несмотря на то, что" },
-  { "es": "asimismo", "ru": "также; кроме того; аналогичным образом" },
-  { "es": "apenas", "ru": "едва; почти не; как только" },
-  { "es": "ejercer", "ru": "осуществлять; заниматься профессией; исполнять" },
-  { "es": "promover", "ru": "продвигать; способствовать; поощрять" },
-  { "es": "inhabilitada", "ru": "лишённая права; дисквалифицированная; признанная неспособной" },
-  { "es": "la patria potestad compartida", "ru": "совместная родительская опека" },
-  { "es": "sufragio", "ru": "избирательное право; голосование" },
-  { "es": "fallecer", "ru": "умереть; скончаться" },
-  { "es": "fracasó", "ru": "потерпел(а) неудачу" },
-  { "es": "embajadora", "ru": "посол (женщина)" },
-  { "es": "poseía", "ru": "владел(а); обладал(а)" },
-  { "es": "escapada", "ru": "побег; вылазка; короткая поездка" },
-  { "es": "regresar", "ru": "возвращаться" },
-  { "es": "injusticia", "ru": "несправедливость" },
-  { "es": "miseria de los indígenas", "ru": "нищета коренных народов" },
-  { "es": "persecución", "ru": "преследование" },
-  { "es": "exiliarse", "ru": "отправиться в изгнание; эмигрировать по политическим причинам" },
-  { "es": "ser confundida con", "ru": "быть перепутанным с; быть принятым за" },
-  { "es": "vendedora ambulante", "ru": "уличный торговец; разносчик" },
-  { "es": "sacar a la fuerza del hotel", "ru": "силой вывести из отеля" },
-  { "es": "no me atrevía", "ru": "я не решался / не решалась" },
-  { "es": "menos mal que me convenciste para hacerlo", "ru": "хорошо, что ты меня убедил(а) это сделать" },
-  { "es": "terrestres", "ru": "земные; наземные" },
-  { "es": "ser una gallina", "ru": "быть трусом" },
-  { "es": "tener (muchas) agallas", "ru": "иметь большую смелость; иметь характер" },
-  { "es": "echarse (para) atrás", "ru": "отступить; передумать; дать задний ход" },
-  { "es": "pensárselo dos veces", "ru": "дважды подумать; хорошенько подумать" },
-  { "es": "ser echado para adelante", "ru": "быть смелым, решительным, инициативным" },
-  { "es": "andar con pies de plomo", "ru": "действовать очень осторожно; ступать крайне осмотрительно" }
+  { "es": "proeza", "uk": "подвиг; видатне досягнення" },
+  { "es": "precursora", "uk": "попередниця; піонерка" },
+  { "es": "haber estado oculto bajo la sombra", "uk": "бути схованим у тіні; залишатися в тіні" },
+  { "es": "vencedores", "uk": "переможці" },
+  { "es": "vencidos", "uk": "переможені" },
+  { "es": "rompedoras", "uk": "новаторський; революційний; що ламає стереотипи" },
+  { "es": "apasionadas", "uk": "захоплений; палкий" },
+  { "es": "apasionantes", "uk": "захопливий; цікавий" },
+  { "es": "ludópata", "uk": "ігроман; людина з гральною залежністю" },
+  { "es": "la monja alférez", "uk": "«черниця-прапорщик»" },
+  { "es": "escapar", "uk": "тікати; рятуватися; втікати" },
+  { "es": "a pesar de que", "uk": "незважаючи на те, що" },
+  { "es": "asimismo", "uk": "також; крім того; у такий самий спосіб" },
+  { "es": "apenas", "uk": "заледве; майже не; щойно" },
+  { "es": "ejercer", "uk": "здійснювати; займатися професією; виконувати" },
+  { "es": "promover", "uk": "просувати; сприяти; підтримувати" },
+  { "es": "inhabilitada", "uk": "позбавлена права; дискваліфікована; визнана неспроможною" },
+  { "es": "la patria potestad compartida", "uk": "спільна батьківська опіка" },
+  { "es": "sufragio", "uk": "виборче право; голосування" },
+  { "es": "fallecer", "uk": "померти; відійти" },
+  { "es": "fracasó", "uk": "зазнав(ла) невдачі" },
+  { "es": "embajadora", "uk": "послиця; посол (жінка)" },
+  { "es": "poseía", "uk": "володів(ла); мав(ла)" },
+  { "es": "escapada", "uk": "втеча; вилазка; коротка поїздка" },
+  { "es": "regresar", "uk": "повертатися" },
+  { "es": "injusticia", "uk": "несправедливість" },
+  { "es": "miseria de los indígenas", "uk": "злидні корінних народів" },
+  { "es": "persecución", "uk": "переслідування" },
+  { "es": "exiliarse", "uk": "піти у вигнання; емігрувати з політичних причин" },
+  { "es": "ser confundida con", "uk": "бути переплутаним з; бути прийнятим за" },
+  { "es": "vendedora ambulante", "uk": "вулична торговка; розносниця" },
+  { "es": "sacar a la fuerza del hotel", "uk": "силою вивести з готелю" },
+  { "es": "no me atrevía", "uk": "я не наважувався / не наважувалася" },
+  { "es": "menos mal que me convenciste para hacerlo", "uk": "добре, що ти мене переконав(ла) це зробити" },
+  { "es": "terrestres", "uk": "земні; наземні" },
+  { "es": "ser una gallina", "uk": "бути боягузом" },
+  { "es": "tener (muchas) agallas", "uk": "мати велику смілість; мати характер" },
+  { "es": "echarse (para) atrás", "uk": "відступити; передумати; дати задній хід" },
+  { "es": "pensárselo dos veces", "uk": "двічі подумати; добре подумати" },
+  { "es": "ser echado para adelante", "uk": "бути смілим, рішучим, ініціативним" },
+  { "es": "andar con pies de plomo", "uk": "діяти дуже обережно; ступати вкрай обачно" }
 ];
 
 /* ---------------------------------------------------------------------
-   1. ГЛОБАЛЬНОЕ СОСТОЯНИЕ
+   1. ГЛОБАЛЬНИЙ СТАН
    --------------------------------------------------------------------- */
 const state = {
   allWords: [],
   favorites: new Set(),
-  // Ключи слов, отмеченных как «Знаю» — сохраняются между сессиями.
+  // Ключі слів, позначених як «Знаю» — зберігаються між сесіями.
   learnedWords: new Set(),
-  direction: 'es-ru',
+  direction: 'es-uk',
   theme: 'light',
 
   session: {
-    // Полный набор слов, выбранный на экране настройки.
+    // Повний набір слів, обраний на екрані налаштування.
     sessionWords: [],
-    // Слова текущего круга и очередь показа внутри него.
+    // Слова поточного кола та черга показу в ньому.
     roundWords: [],
     currentRound: [],
-    // Итоги текущего круга.
+    // Підсумки поточного кола.
     knownThisRound: [],
     unknownThisRound: [],
-    // Каждое слово, по которому был дан любой ответ («Знаю» или «Не знаю»),
-    // считается проработанным — но учитывается только один раз за сессию.
+    // Кожне слово, на яке дано будь-яку відповідь («Знаю» чи «Не знаю»),
+    // вважається опрацьованим — але враховується лише один раз за сесію.
     studiedWords: new Set(),
     dontKnowPresses: 0,
     roundsCount: 1,
@@ -779,18 +779,18 @@ const state = {
   }
 };
 
-// В словаре есть слова с одинаковым es (напр. «la debilidad»), поэтому
-// ключ статуса «изучено» строим из обеих сторон карточки.
-function wordKey(word) { return `${word.es}|||${word.ru}`; }
+// У словнику є слова з однаковим es (напр. «la debilidad»), тому
+// ключ статусу «вивчено» будуємо з обох боків картки.
+function wordKey(word) { return `${word.es}|||${word.uk}`; }
 
 /* ---------------------------------------------------------------------
-   2. ЗАГРУЗКА СЛОВ И LOCALSTORAGE
+   2. ЗАВАНТАЖЕННЯ СЛІВ І LOCALSTORAGE
    --------------------------------------------------------------------- */
 
 function loadWords() {
-  // Слова берём прямо из массива WORDS_DATA выше — никакой сетевой
-  // загрузки не требуется, поэтому файл работает и при открытии
-  // напрямую (file://), без сервера.
+  // Слова беремо прямо з масиву WORDS_DATA вище — жодного мережевого
+  // завантаження не потрібно, тому файл працює і при відкритті
+  // напряму (file://), без сервера.
   state.allWords = WORDS_DATA;
 }
 
@@ -804,9 +804,11 @@ function loadSettingsFromStorage() {
     try { state.learnedWords = new Set(JSON.parse(learned)); } catch (e) { /* ignore */ }
   }
   const theme = localStorage.getItem('esFlashcards_theme');
-  if (theme) state.theme = theme;
+  if (theme === 'dark' || theme === 'light') state.theme = theme;
+  // Значення напрямку перекладу перевіряємо: у старих версіях у сховищі
+  // могло лишитися 'es-ru' / 'ru-es'.
   const direction = localStorage.getItem('esFlashcards_direction');
-  if (direction) state.direction = direction;
+  if (direction === 'es-uk' || direction === 'uk-es') state.direction = direction;
 }
 
 function saveLearnedToStorage() {
@@ -834,7 +836,7 @@ function toggleFavorite(esWord) {
 }
 
 /* ---------------------------------------------------------------------
-   3. ТЕМА / НАПРАВЛЕНИЕ ПЕРЕВОДА
+   3. ТЕМА / НАПРЯМОК ПЕРЕКЛАДУ
    --------------------------------------------------------------------- */
 
 function applyTheme() {
@@ -848,28 +850,28 @@ function toggleTheme() {
 }
 
 function applyDirectionLabel() {
-  document.getElementById('directionToggle').textContent = state.direction === 'es-ru' ? 'ES → RU' : 'RU → ES';
+  document.getElementById('directionToggle').textContent = state.direction === 'es-uk' ? 'ES → UA' : 'UA → ES';
 }
 function toggleDirection() {
-  state.direction = state.direction === 'es-ru' ? 'ru-es' : 'es-ru';
+  state.direction = state.direction === 'es-uk' ? 'uk-es' : 'es-uk';
   applyDirectionLabel();
   saveDirectionToStorage();
   if (state.session.currentWord) renderCardFaces();
 }
 function getCardFaces(word) {
-  if (state.direction === 'es-ru') return { front: word.es, back: word.ru };
-  return { front: word.ru, back: word.es };
+  if (state.direction === 'es-uk') return { front: word.es, back: word.uk };
+  return { front: word.uk, back: word.es };
 }
 
 /* ---------------------------------------------------------------------
-   4. ВКЛАДКА "СПИСОК СЛОВ"
+   4. ВКЛАДКА "СПИСОК СЛІВ"
    --------------------------------------------------------------------- */
 
-/** Приводит бейдж статуса и строку таблицы к текущему статусу слова. */
+/** Приводить бейдж статусу і рядок таблиці до поточного статусу слова. */
 function renderStatusBadge(badge, row, word) {
   const learned = isWordLearned(word);
   badge.className = learned ? 'badge badge-learned' : 'badge badge-new';
-  badge.textContent = learned ? '✓ изучено' : 'не изучено';
+  badge.textContent = learned ? '✓ вивчено' : 'не вивчено';
   badge.setAttribute('aria-pressed', String(learned));
   row.classList.toggle('is-learned', learned);
 }
@@ -881,7 +883,7 @@ function renderWordList(filterText = '') {
   const filtered = state.allWords.filter(w => {
     const q = filterText.trim().toLowerCase();
     if (!q) return true;
-    return w.es.toLowerCase().includes(q) || w.ru.toLowerCase().includes(q);
+    return w.es.toLowerCase().includes(q) || w.uk.toLowerCase().includes(q);
   });
 
   const updateCountLabel = () => {
@@ -907,13 +909,13 @@ function renderWordList(filterText = '') {
 
     const tdEs = document.createElement('td');
     tdEs.textContent = word.es;
-    const tdRu = document.createElement('td');
-    tdRu.textContent = word.ru;
+    const tdUk = document.createElement('td');
+    tdUk.textContent = word.uk;
 
     const tdStatus = document.createElement('td');
     const badge = document.createElement('button');
     badge.type = 'button';
-    badge.title = 'Нажмите, чтобы изменить статус';
+    badge.title = 'Натисніть, щоб змінити статус';
     renderStatusBadge(badge, tr, word);
     badge.addEventListener('click', () => {
       setWordLearned(word, !isWordLearned(word));
@@ -922,7 +924,7 @@ function renderWordList(filterText = '') {
     });
     tdStatus.appendChild(badge);
 
-    tr.append(tdFav, tdEs, tdRu, tdStatus);
+    tr.append(tdFav, tdEs, tdUk, tdStatus);
     tbody.appendChild(tr);
   }
 }
@@ -936,7 +938,7 @@ function updateFavCountLabel() {
 }
 
 /* ---------------------------------------------------------------------
-   5. НАСТРОЙКА СЕССИИ ОБУЧЕНИЯ
+   5. НАЛАШТУВАННЯ СЕСІЇ НАВЧАННЯ
    --------------------------------------------------------------------- */
 
 let selectedSize = 20;
@@ -963,9 +965,9 @@ function shuffleArray(arr) {
 }
 
 /**
- * Начинает сессию: сбрасывает счётчики и запускает первый круг.
- * @param {Array} words   слова сессии
- * @param {boolean} shuffle  перемешивать ли первый круг
+ * Починає сесію: скидає лічильники та запускає перше коло.
+ * @param {Array} words   слова сесії
+ * @param {boolean} shuffle  чи перемішувати перше коло
  */
 function beginSession(words, shuffle) {
   if (!words || words.length === 0) return;
@@ -979,7 +981,7 @@ function beginSession(words, shuffle) {
   beginRound(shuffle ? shuffleArray(words) : [...words]);
 }
 
-/** Начинает очередной круг из переданных слов. */
+/** Починає наступне коло з переданих слів. */
 function beginRound(words) {
   state.session.roundWords = [...words];
   state.session.currentRound = [...words];
@@ -990,7 +992,7 @@ function beginRound(words) {
   showNextCard();
 }
 
-/** Новый круг по тем же словам, что были выбраны на экране настройки. */
+/** Нове коло з тих самих слів, що були обрані на екрані налаштування. */
 function startNewRound() {
   const words = state.session.sessionWords;
   if (!words || words.length === 0) {
@@ -1000,7 +1002,7 @@ function startNewRound() {
   beginSession(words, true);
 }
 
-/** Следующая итерация: только слова, не отмеченные как «Знаю». */
+/** Наступна ітерація: лише слова, не позначені як «Знаю». */
 function continueStudy() {
   const words = [...state.session.unknownThisRound];
   if (words.length === 0) return;
@@ -1015,12 +1017,12 @@ function exitStudy() {
 }
 
 /* ---------------------------------------------------------------------
-   6. ОСНОВНОЙ ЦИКЛ ОБУЧЕНИЯ (очередь повторения)
+   6. ОСНОВНИЙ ЦИКЛ НАВЧАННЯ (черга повторення)
    --------------------------------------------------------------------- */
 
 function showNextCard() {
-  // Круг больше не продолжается автоматически: доходим до конца очереди
-  // и показываем итоги круга.
+  // Коло більше не триває автоматично: доходимо до кінця черги
+  // і показуємо підсумки кола.
   if (state.session.currentRound.length === 0) {
     finishRound();
     return;
@@ -1049,15 +1051,15 @@ function renderCardFaces() {
 }
 
 function updateProgressUI() {
-  // Прогресс считаем внутри круга: любой ответ («Знаю» или «Не знаю»)
-  // продвигает полосу, потому что слово уже проработано.
+  // Прогрес рахуємо в межах кола: будь-яка відповідь («Знаю» чи «Не знаю»)
+  // просуває смугу, бо слово вже опрацьоване.
   const { roundWords, knownThisRound, unknownThisRound, currentRound, roundsCount } = state.session;
   const roundTotal = roundWords.length;
   const answered = knownThisRound.length + unknownThisRound.length;
 
   document.getElementById('progressCounter').textContent = `${answered} / ${roundTotal}`;
   document.getElementById('roundInfo').textContent =
-    `круг ${roundsCount} · осталось ${currentRound.length}`;
+    `коло ${roundsCount} · залишилось ${currentRound.length}`;
 
   const pct = roundTotal === 0 ? 0 : Math.round((answered / roundTotal) * 100);
   document.getElementById('progressBarFill').style.width = `${pct}%`;
@@ -1083,11 +1085,11 @@ function markDontKnow() {
 }
 
 function stopSession() {
-  if (confirm('Остановить текущую сессию обучения?')) exitStudy();
+  if (confirm('Зупинити поточну сесію навчання?')) exitStudy();
 }
 
 /* ---------------------------------------------------------------------
-   7. ПЕРЕВОРОТ КАРТОЧКИ, СВАЙПЫ, КЛАВИАТУРА
+   7. ПЕРЕВЕРТАННЯ КАРТКИ, СВАЙПИ, КЛАВІАТУРА
    --------------------------------------------------------------------- */
 
 function flipCard() {
@@ -1153,7 +1155,7 @@ function setupKeyboardControls() {
 }
 
 /* ---------------------------------------------------------------------
-   8. ЭКРАН СТАТИСТИКИ
+   8. ЕКРАН ПІДСУМКІВ КОЛА
    --------------------------------------------------------------------- */
 
 function formatElapsed(ms) {
@@ -1163,7 +1165,7 @@ function formatElapsed(ms) {
   return `${minutes}:${String(seconds).padStart(2, '0')}`;
 }
 
-/** Заполняет один из списков итогов круга. */
+/** Заповнює один зі списків підсумків кола. */
 function renderResultList(listId, words, emptyText) {
   const list = document.getElementById(listId);
   list.innerHTML = '';
@@ -1181,10 +1183,10 @@ function renderResultList(listId, words, emptyText) {
     const es = document.createElement('span');
     es.className = 'es';
     es.textContent = word.es;
-    const ru = document.createElement('span');
-    ru.className = 'ru';
-    ru.textContent = word.ru;
-    li.append(es, ru);
+    const uk = document.createElement('span');
+    uk.className = 'uk';
+    uk.textContent = word.uk;
+    li.append(es, uk);
     list.appendChild(li);
   }
 }
@@ -1195,14 +1197,14 @@ function finishRound() {
   const allLearned = unknownThisRound.length === 0;
 
   document.getElementById('roundTitle').textContent =
-    allLearned ? '🎉 Все слова изучены!' : `✅ Круг ${roundsCount} завершён`;
+    allLearned ? '🎉 Усі слова вивчені!' : `✅ Коло ${roundsCount} завершено`;
 
   const conclusion = allLearned
-    ? 'В этом круге не осталось слов, которые вы не знаете.'
-    : `Выучено ${knownThisRound.length} из ${roundWords.length} — осталось повторить ${unknownThisRound.length}.`;
+    ? 'У цьому колі не залишилось слів, яких ви не знаєте.'
+    : `Вивчено ${knownThisRound.length} з ${roundWords.length} — залишилось повторити ${unknownThisRound.length}.`;
   document.getElementById('roundNote').textContent =
-    `${conclusion} Всего за сессию проработано ${studiedWords.size} из ${sessionWords.length} слов, ` +
-    `«Не знаю» нажато ${dontKnowPresses} раз.`;
+    `${conclusion} Усього за сесію опрацьовано ${studiedWords.size} з ${sessionWords.length} слів, ` +
+    `«Не знаю» натиснуто ${dontKnowPresses} раз(ів).`;
 
   document.getElementById('statRoundTotal').textContent = roundWords.length;
   document.getElementById('statKnow').textContent = knownThisRound.length;
@@ -1211,19 +1213,19 @@ function finishRound() {
 
   document.getElementById('knownCount').textContent = `${knownThisRound.length} сл.`;
   document.getElementById('unknownCount').textContent = `${unknownThisRound.length} сл.`;
-  renderResultList('knownList', knownThisRound, 'Пока ни одного слова — попробуйте ещё круг.');
-  renderResultList('unknownList', unknownThisRound, 'Все слова круга отмечены как «Знаю» 👏');
+  renderResultList('knownList', knownThisRound, 'Поки жодного слова — спробуйте ще коло.');
+  renderResultList('unknownList', unknownThisRound, 'Усі слова кола позначені як «Знаю» 👏');
 
   const continueBtn = document.getElementById('continueRoundBtn');
   continueBtn.hidden = allLearned;
-  continueBtn.textContent = `▶ Продолжить изучение (${unknownThisRound.length})`;
+  continueBtn.textContent = `▶ Продовжити вивчення (${unknownThisRound.length})`;
 
   refreshWordList();
   showScreen('roundScreen');
 }
 
 /* ---------------------------------------------------------------------
-   ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ / ВКЛАДОК
+   ПЕРЕМИКАННЯ ЕКРАНІВ / ВКЛАДОК
    --------------------------------------------------------------------- */
 
 function showScreen(screenId) {
@@ -1244,7 +1246,7 @@ function setupTabs() {
 }
 
 /* ---------------------------------------------------------------------
-   ИНИЦИАЛИЗАЦИЯ ПРИЛОЖЕНИЯ
+   ІНІЦІАЛІЗАЦІЯ ЗАСТОСУНКУ
    --------------------------------------------------------------------- */
 
 function init() {
@@ -1273,7 +1275,7 @@ function init() {
     const pool = favoritesOnly ? state.allWords.filter(w => state.favorites.has(w.es)) : state.allWords;
 
     if (pool.length === 0) {
-      alert('Нет слов для обучения. Проверьте словарь или снимите фильтр "только избранные".');
+      alert('Немає слів для навчання. Перевірте словник або зніміть фільтр "лише вибрані".');
       return;
     }
 
