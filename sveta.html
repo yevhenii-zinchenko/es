@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Испанские слова — карточки</title>
+<style>
+/* =========================================================================
+   ИСПАНСКИЕ СЛОВА — стили
+   Палитра навеяна андалузской плиткой (азулежу): глубокий тил + подсолнух +
+   терракота. Карточка стилизована как керамическая плитка/открытка.
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #eef2f0;
+  --surface: #ffffff;
+  --surface-2: #f6f8f7;
+  --text: #1b2b29;
+  --text-muted: #5c6b68;
+  --border: #dbe3e0;
+
+  --teal: #146356;
+  --teal-dark: #0e4a41;
+  --gold: #e3a23d;
+  --red: #c1440e;
+  --green: #3c8558;
+
+  --shadow: 0 10px 30px -12px rgba(20, 40, 35, 0.25);
+  --radius: 16px;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg: #10161a;
+  --surface: #1a2226;
+  --surface-2: #212b2f;
+  --text: #edefee;
+  --text-muted: #93a19d;
+  --border: #2c383c;
+
+  --teal: #2e9c87;
+  --teal-dark: #1f7566;
+  --gold: #f0b84d;
+  --red: #e2603a;
+  --green: #57b37d;
+
+  --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+body { min-height: 100vh; }
+
+.app {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 16px 60px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 4px 18px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.header-controls { display: flex; gap: 8px; }
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.96); }
+.btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+.btn-primary { background: var(--teal); color: #fff; box-shadow: var(--shadow); }
+.btn-primary:hover { background: var(--teal-dark); }
+
+.btn-secondary { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--surface); }
+
+.btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+.btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
+
+.btn-icon {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-lg { width: 100%; padding: 15px 20px; font-size: 1.05rem; margin-top: 22px; }
+
+.btn-know, .btn-dontknow { flex: 1; padding: 15px 10px; font-size: 1rem; color: #fff; box-shadow: var(--shadow); }
+.btn-know { background: var(--green); }
+.btn-know:hover { filter: brightness(1.08); }
+.btn-dontknow { background: var(--red); }
+.btn-dontknow:hover { filter: brightness(1.08); }
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  padding: 4px;
+  margin-bottom: 22px;
+}
+.tab-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 0;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.tab-btn.active { background: var(--surface); color: var(--teal); box-shadow: var(--shadow); }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.list-toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+
+.input {
+  flex: 1;
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+}
+.input:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
+
+.word-count { font-size: 0.85rem; color: var(--text-muted); white-space: nowrap; }
+
+.table-wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.word-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.word-table th {
+  text-align: left;
+  padding: 12px 14px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.word-table td { padding: 11px 14px; border-top: 1px solid var(--border); }
+.word-table tr:hover td { background: var(--surface-2); }
+
+.fav-toggle { cursor: pointer; font-size: 1.1rem; background: none; border: none; color: var(--gold); padding: 0; }
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+.screen-title { font-family: var(--font-display); font-weight: 600; text-align: center; margin: 6px 0 20px; }
+
+.setup-label {
+  font-weight: 600;
+  margin: 18px 0 10px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.size-options { display: flex; flex-wrap: wrap; gap: 10px; }
+.size-btn {
+  flex: 1;
+  min-width: 60px;
+  padding: 14px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.size-btn:hover { border-color: var(--teal); }
+.size-btn.selected { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+.checkbox-row { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-size: 0.95rem; cursor: pointer; }
+.checkbox-row input { width: 18px; height: 18px; accent-color: var(--teal); cursor: pointer; }
+
+.progress-info { margin-bottom: 18px; }
+.progress-bar-track { width: 100%; height: 8px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--teal), var(--gold));
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+.progress-text { display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.88rem; color: var(--text-muted); }
+.round-info { font-style: italic; }
+
+.card-stage { display: flex; justify-content: center; padding: 10px 0 28px; perspective: 1400px; }
+
+.flashcard { width: 100%; max-width: 420px; height: 260px; cursor: pointer; }
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  text-align: center;
+}
+
+.flashcard-front { background: var(--surface); border: 1px solid var(--border); }
+.flashcard-front::before {
+  content: "";
+  position: absolute;
+  top: 14px; left: 14px;
+  width: 20px; height: 20px;
+  border-top: 3px solid var(--gold);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px 0 0 0;
+  opacity: 0.6;
+}
+.flashcard-front::after {
+  content: "";
+  position: absolute;
+  bottom: 14px; right: 14px;
+  width: 20px; height: 20px;
+  border-bottom: 3px solid var(--gold);
+  border-right: 3px solid var(--gold);
+  border-radius: 0 0 4px 0;
+  opacity: 0.6;
+}
+
+.flashcard-back {
+  background: linear-gradient(155deg, var(--teal), var(--teal-dark));
+  color: #fff;
+  transform: rotateY(180deg);
+}
+
+.card-word { font-family: var(--font-display); font-size: 2rem; font-weight: 600; line-height: 1.2; word-break: break-word; }
+
+.flip-hint { font-size: 0.78rem; opacity: 0.55; font-weight: 500; }
+
+.fav-star {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--gold);
+  line-height: 1;
+  padding: 4px;
+}
+
+.answer-buttons { display: flex; gap: 12px; margin-bottom: 16px; }
+
+.study-toolbar { display: flex; justify-content: center; gap: 10px; margin-bottom: 16px; }
+
+.keyboard-hint { text-align: center; font-size: 0.8rem; color: var(--text-muted); }
+
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0 24px; }
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.stat-value { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--teal); }
+.stat-label { font-size: 0.8rem; color: var(--text-muted); text-align: center; }
+
+.stats-buttons { display: flex; flex-direction: column; gap: 10px; }
+
+@media (max-width: 480px) {
+  .logo { font-size: 1.25rem; }
+  .card-word { font-size: 1.6rem; }
+  .flashcard { height: 220px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <header class="header">
+    <h1 class="logo">🇪🇸 Испанские слова</h1>
+    <div class="header-controls">
+      <button id="directionToggle" class="btn btn-ghost" title="Направление перевода">ES → RU</button>
+      <button id="themeToggle" class="btn btn-icon" title="Тёмная тема">🌙</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="cards">Карточки</button>
+    <button class="tab-btn" data-tab="list">Список слов</button>
+  </nav>
+
+  <section id="tab-list" class="tab-content">
+    <div class="list-toolbar">
+      <input type="text" id="searchInput" class="input" placeholder="🔍 Поиск слова...">
+      <span id="wordCount" class="word-count"></span>
+    </div>
+    <div class="table-wrapper">
+      <table class="word-table">
+        <thead>
+          <tr><th></th><th>Испанский</th><th>Русский</th></tr>
+        </thead>
+        <tbody id="wordTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="tab-cards" class="tab-content active">
+
+    <div id="setupScreen" class="screen active">
+      <h2 class="screen-title">Настройка сессии</h2>
+
+      <p class="setup-label">Сколько слов изучать?</p>
+      <div class="size-options" id="sizeOptions">
+        <button class="size-btn" data-size="20">20</button>
+        <button class="size-btn" data-size="30">30</button>
+        <button class="size-btn" data-size="40">40</button>
+        <button class="size-btn" data-size="50">50</button>
+        <button class="size-btn" data-size="all">Все</button>
+      </div>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="favoritesOnly">
+        <span>Учить только избранные ⭐ (<span id="favCount">0</span>)</span>
+      </label>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="shuffleOnStart" checked>
+        <span>Перемешать слова</span>
+      </label>
+
+      <button id="startSessionBtn" class="btn btn-primary btn-lg">Начать обучение</button>
+    </div>
+
+    <div id="studyScreen" class="screen">
+      <div class="progress-info">
+        <div class="progress-bar-track"><div id="progressBarFill" class="progress-bar-fill"></div></div>
+        <div class="progress-text">
+          <span id="progressCounter">0 / 0</span>
+          <span id="roundInfo" class="round-info"></span>
+        </div>
+      </div>
+
+      <div class="card-stage">
+        <div id="flashcard" class="flashcard">
+          <div class="flashcard-inner">
+            <div class="flashcard-face flashcard-front">
+              <button class="fav-star" id="favStar" title="В избранное">☆</button>
+              <span id="frontText" class="card-word"></span>
+              <span class="flip-hint">нажмите или пробел, чтобы перевернуть</span>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <button class="fav-star" id="favStarBack" title="В избранное">☆</button>
+              <span id="backText" class="card-word"></span>
+              <span class="flip-hint">нажмите, чтобы перевернуть обратно</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="answer-buttons">
+        <button id="dontKnowBtn" class="btn btn-dontknow">✕ Не знаю</button>
+        <button id="knowBtn" class="btn btn-know">✓ Знаю</button>
+      </div>
+
+      <div class="study-toolbar">
+        <button id="shuffleBtn" class="btn btn-ghost">🔀 Перемешать</button>
+        <button id="stopBtn" class="btn btn-ghost">⏹ Остановить</button>
+      </div>
+
+      <p class="keyboard-hint">⌨️ ← Не знаю&nbsp;&nbsp;|&nbsp;&nbsp;Пробел — перевернуть&nbsp;&nbsp;|&nbsp;&nbsp;→ Знаю</p>
+    </div>
+
+    <div id="statsScreen" class="screen">
+      <h2 class="screen-title">🎉 Сессия завершена!</h2>
+
+      <div class="stats-grid">
+        <div class="stat-card"><span class="stat-value" id="statTotal">0</span><span class="stat-label">слов в сессии</span></div>
+        <div class="stat-card"><span class="stat-value" id="statDontKnow">0</span><span class="stat-label">раз нажато «Не знаю»</span></div>
+        <div class="stat-card"><span class="stat-value" id="statRounds">0</span><span class="stat-label">кругов пройдено</span></div>
+        <div class="stat-card"><span class="stat-value" id="statTime">0:00</span><span class="stat-label">время обучения</span></div>
+      </div>
+
+      <div class="stats-buttons">
+        <button id="repeatSameBtn" class="btn btn-primary">🔁 Повторить эти же слова</button>
+        <button id="newSessionBtn" class="btn btn-secondary">🆕 Новая сессия</button>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+/* =========================================================================
+   ИСПАНСКИЕ СЛОВА — логика приложения
+   ========================================================================= */
+
+/* ---------------------------------------------------------------------
+   0. СЛОВАРЬ (замените этот массив своим списком слов)
+   Формат каждого элемента: { es: "испанское слово", ru: "русский перевод" }
+   --------------------------------------------------------------------- */
+const WORDS_DATA = [
+  { "es": "pasar un rato divertido", "ru": "весело провести время" },
+  { "es": "echar una mano", "ru": "протягивать руку помощи" },
+  { "es": "atrévete", "ru": "попробуйте" },
+  { "es": "recorrer", "ru": "пройти; проехать; преодолевать" },
+  { "es": "vergüenza", "ru": "стыд" },
+  { "es": "complejos", "ru": "комплексы" },
+  { "es": "es lo que se lleva ahora", "ru": "Это сейчас модно." },
+  { "es": "nuestro ritmo es frenético", "ru": "бешеный ритм" },
+  { "es": "apuntarse", "ru": "записываться, присоединяться к плану или группе" },
+  { "es": "de repente", "ru": "внезапно" },
+  { "es": "aislamiento", "ru": "изоляция" },
+  { "es": "hay muchas maneras de + infinitivo", "ru": "есть много способов" },
+  { "es": "ponerle un poco de ganas", "ru": "приложить немного усилий" },
+  { "es": "atreverse a", "ru": "осмелиться, решиться" },
+  { "es": "tener miedo a", "ru": "бояться чего-либо" },
+  { "es": "tener miedo de", "ru": "бояться сделать что-либо" },
+  { "es": "sentirse poderoso", "ru": "чувствовать себя сильным" },
+  { "es": "vencer tus miedos", "ru": "победить свои страхи" },
+  { "es": "fijar nuevas metas y lograr superarlas", "ru": "ставить новые цели и достигать их" },
+  { "es": "Pues yo no lo veo así", "ru": "Я так не считаю" },
+  { "es": "valiente", "ru": "смелый" },
+  { "es": "valentía", "ru": "смелость" },
+  { "es": "era una verdadera pasada", "ru": "Это было просто потрясающе" },
+  { "es": "animarse", "ru": "осмелиться, решиться" },
+  { "es": "muy facilón", "ru": "слишком простой" },
+  { "es": "hacer daño", "ru": "причинять вред" },
+  { "es": "menuda estafa", "ru": "Вот это обман" },
+  { "es": "merecer la pena", "ru": "стоить того" },
+  { "es": "aprovechar", "ru": "использовать, воспользоваться" },
+  { "es": "mancharse", "ru": "испачкаться" },
+  { "es": "pedalear", "ru": "крутить педали, ехать на велосипеде" },
+  { "es": "emprender acciones", "ru": "принять меры" },
+  { "es": "mostrar este hilo", "ru": "Показать эту ветку" },
+  { "es": "No hay nada más atrevido que la ignorancia", "ru": "Нет ничего более дерзкого, чем невежество" },
+  { "es": "atrevido", "ru": "нахальный, самоуверенный, дерзкий" },
+  { "es": "imprudencia", "ru": "неосторожность, безрассудство" },
+  { "es": "prudencia", "ru": "осторожность, благоразумие" },
+  { "es": "temerario", "ru": "безрассудный, отчаянный" },
+  { "es": "precavido", "ru": "предусмотрительный, осторожный" },
+  { "es": "sensatez", "ru": "здравый смысл, благоразумие" },
+  { "es": "tomar una decisión", "ru": "принять решение" },
+  { "es": "tomar precauciones", "ru": "принять меры предосторожности" },
+  { "es": "coincidís", "ru": "согласны?" },
+  { "es": "el culpable", "ru": "виновный, виновник" },
+  { "es": "instintos innatos", "ru": "врождённые инстинкты" },
+  { "es": "antecesores", "ru": "предки" },
+  { "es": "predadores", "ru": "хищники" },
+  { "es": "las inclemencias del tiempo", "ru": "суровые погодные условия" },
+  { "es": "los sentidos captan el foco del peligro", "ru": "органы чувств улавливают источник опасности" },
+  { "es": "lucha y huida", "ru": "борьба и бегство (реакция «бей или беги»)" },
+  { "es": "la noción de la magnitud", "ru": "представление о величине, понимание масштаба" },
+  { "es": "aviso, advertencia, amenaza", "ru": "предупреждение, угроза" },
+  { "es": "patrón, comportamiento, conducta", "ru": "модель поведения" },
+  { "es": "espanto, pánico, terror", "ru": "ужас, паника, террор" },
+  { "es": "pacto, acuerdo, compromiso", "ru": "соглашение, договор, обязательство" },
+  { "es": "dureza, crudeza, inclemencia", "ru": "суровость" },
+  { "es": "pelea, revuelta, lucha", "ru": "драка, восстание, борьба" },
+  { "es": "salvar, defender, proteger", "ru": "спасать, защищать, оберегать" },
+  { "es": "decepción, revés, fracaso", "ru": "разочарование, неудача, провал" },
+  { "es": "intuición, impulso, instinto", "ru": "интуиция, импульс, инстинкт" },
+
+  { "es": "terremoto", "ru": "землетрясение" },
+  { "es": "ser una lata", "ru": "быть скучным, надоедливым; быть настоящей морокой" },
+  { "es": "atrapar", "ru": "ловить; поймать; застать" },
+  { "es": "almacenes", "ru": "склады; универмаги" },
+  { "es": "agotado", "ru": "измотанный, уставший; распроданный" },
+  { "es": "ser insoportable", "ru": "быть невыносимым" },
+  { "es": "alucinante", "ru": "потрясающий, невероятный, поразительный" },
+  { "es": "que nos acompleja", "ru": "что заставляет нас комплексовать" },
+  { "es": "los complejos", "ru": "комплексы" },
+  { "es": "la propia grandeza", "ru": "собственное величие, собственная значимость" },
+  { "es": "se planteó", "ru": "задумался; поставил перед собой цель" },
+  { "es": "cumplir una misión", "ru": "выполнить миссию" },
+  { "es": "la fuga", "ru": "бегство; побег" },
+  { "es": "sentirse fascinado/a", "ru": "быть очарованным, восхищаться" },
+  { "es": "momentos cumbre", "ru": "кульминационные моменты, лучшие моменты" },
+  { "es": "nos inquietamos", "ru": "мы тревожимся, беспокоимся" },
+  { "es": "la debilidad", "ru": "слабость" },
+  { "es": "de hecho", "ru": "на самом деле; фактически" },
+  { "es": "quedarse anclado/a", "ru": "застрять, не двигаться вперёд" },
+  { "es": "anhelos", "ru": "заветные мечты, сильные желания" },
+  { "es": "deseos incumplidos", "ru": "несбывшиеся желания" },
+  { "es": "apostar", "ru": "делать ставку; выбирать; решаться" },
+  { "es": "el alejamiento social", "ru": "социальная изоляция, отдаление от общества" },
+  { "es": "acudir a", "ru": "приходить; обращаться" },
+  { "es": "favorecer", "ru": "способствовать; помогать" },
+  { "es": "zona de confort", "ru": "зона комфорта" },
+  { "es": "marcar la vida", "ru": "оставить след в жизни; изменить жизнь" },
+  { "es": "montar una empresa", "ru": "открыть, основать компанию или бизнес" },
+
+  { "es": "la debilidad", "ru": "слабость" },
+  { "es": "debilitado", "ru": "ослабленный" },
+  { "es": "debilitar", "ru": "ослаблять" },
+
+  { "es": "la conexión", "ru": "связь" },
+  { "es": "conectado", "ru": "связанный, подключённый" },
+  { "es": "conectar", "ru": "соединять, подключать" },
+
+  { "es": "el anclaje", "ru": "якорь, закрепление" },
+  { "es": "anclado", "ru": "закреплённый, застрявший" },
+  { "es": "anclar", "ru": "закреплять" },
+
+  { "es": "la posibilidad", "ru": "возможность" },
+  { "es": "posible", "ru": "возможный" },
+  { "es": "posibilitar", "ru": "делать возможным" },
+
+  { "es": "crecimiento", "ru": "рост" },
+  { "es": "crecido", "ru": "выросший" },
+  { "es": "crecer", "ru": "расти" },
+
+  { "es": "el complejo", "ru": "комплекс" },
+  { "es": "acomplejado", "ru": "закомплексованный" },
+  { "es": "acomplejar", "ru": "вызывать комплексы" },
+
+  { "es": "pérdida", "ru": "потеря" },
+  { "es": "perdido", "ru": "потерянный" },
+  { "es": "perder", "ru": "терять" },
+
+  { "es": "el anhelo", "ru": "мечта, стремление" },
+  { "es": "anhelado", "ru": "желанный" },
+  { "es": "anhelar", "ru": "страстно желать" },
+
+  { "es": "la fuga", "ru": "побег" },
+  { "es": "fugado", "ru": "сбежавший" },
+  { "es": "fugarse", "ru": "сбежать" },
+
+  { "es": "cumplimiento", "ru": "выполнение" },
+  { "es": "cumplido", "ru": "выполненный" },
+  { "es": "cumplir", "ru": "выполнять" },
+
+  { "es": "la ansiedad", "ru": "тревожность" },
+  { "es": "ansioso", "ru": "тревожный" },
+  { "es": "ansiar", "ru": "страстно желать" },
+  { "es": "retos", "ru": "вызовы; трудные задачи" },
+  { "es": "logros", "ru": "достижения" },
+  { "es": "sucedió", "ru": "произошло" },
+  { "es": "hazaña", "ru": "подвиг; выдающееся достижение" },
+  { "es": "transmitir", "ru": "передавать (информацию, чувства, сигнал)" },
+  { "es": "temeridad", "ru": "безрассудство; опрометчивость" },
+  { "es": "sensatez", "ru": "благоразумие; здравомыслие" },
+  { "es": "liderazgo", "ru": "лидерство" },
+  { "es": "determinación", "ru": "решимость; целеустремлённость" },
+  { "es": "imprudencia", "ru": "неосторожность; безрассудство" },
+  { "es": "desafío", "ru": "вызов; испытание" },
+  { "es": "avalancha", "ru": "лавина; поток; шквал" },
+
+  { "es": "nunca se rindan", "ru": "Никогда не сдавайтесь" },
+  { "es": "ascender", "ru": "подниматься; восходить; повышаться (в должности)" },
+  { "es": "alcanzar las cimas", "ru": "достигать вершин" },
+  { "es": "quedaron sepultadas", "ru": "оказались погребены; были засыпаны" },
+  { "es": "apuntarse", "ru": "записаться; зарегистрироваться; присоединиться" },
+
+  { "es": "proeza", "ru": "подвиг; выдающееся достижение" },
+  { "es": "precursora", "ru": "предшественница; первопроходец" },
+  { "es": "haber estado oculto bajo la sombra", "ru": "быть скрытым в тени; оставаться в тени" },
+  { "es": "vencedores", "ru": "победители" },
+  { "es": "vencidos", "ru": "побеждённые" },
+  { "es": "rompedoras", "ru": "новаторский; революционный; ломающий стереотипы" },
+  { "es": "apasionadas", "ru": "увлечённый; страстный" },
+  { "es": "apasionantes", "ru": "захватывающий; увлекательный" },
+  { "es": "ludópata", "ru": "игроман; человек, страдающий игровой зависимостью" },
+  { "es": "la monja alférez", "ru": "«монахиня-прапорщик»" },
+  { "es": "escapar", "ru": "убегать; спасаться; сбегать" },
+  { "es": "a pesar de que", "ru": "несмотря на то, что" },
+  { "es": "asimismo", "ru": "также; кроме того; аналогичным образом" },
+  { "es": "apenas", "ru": "едва; почти не; как только" },
+  { "es": "ejercer", "ru": "осуществлять; заниматься профессией; исполнять" },
+  { "es": "promover", "ru": "продвигать; способствовать; поощрять" },
+  { "es": "inhabilitada", "ru": "лишённая права; дисквалифицированная; признанная неспособной" },
+  { "es": "la patria potestad compartida", "ru": "совместная родительская опека" },
+  { "es": "sufragio", "ru": "избирательное право; голосование" },
+  { "es": "fallecer", "ru": "умереть; скончаться" },
+  { "es": "fracasó", "ru": "потерпел(а) неудачу" },
+  { "es": "embajadora", "ru": "посол (женщина)" },
+  { "es": "poseía", "ru": "владел(а); обладал(а)" },
+  { "es": "escapada", "ru": "побег; вылазка; короткая поездка" },
+  { "es": "regresar", "ru": "возвращаться" },
+  { "es": "injusticia", "ru": "несправедливость" },
+  { "es": "miseria de los indígenas", "ru": "нищета коренных народов" },
+  { "es": "persecución", "ru": "преследование" },
+  { "es": "exiliarse", "ru": "отправиться в изгнание; эмигрировать по политическим причинам" },
+  { "es": "ser confundida con", "ru": "быть перепутанным с; быть принятым за" },
+  { "es": "vendedora ambulante", "ru": "уличный торговец; разносчик" },
+  { "es": "sacar a la fuerza del hotel", "ru": "силой вывести из отеля" },
+  { "es": "no me atrevía", "ru": "я не решался / не решалась" },
+  { "es": "menos mal que me convenciste para hacerlo", "ru": "хорошо, что ты меня убедил(а) это сделать" },
+  { "es": "terrestres", "ru": "земные; наземные" },
+  { "es": "ser una gallina", "ru": "быть трусом" },
+  { "es": "tener (muchas) agallas", "ru": "иметь большую смелость; иметь характер" },
+  { "es": "echarse (para) atrás", "ru": "отступить; передумать; дать задний ход" },
+  { "es": "pensárselo dos veces", "ru": "дважды подумать; хорошенько подумать" },
+  { "es": "ser echado para adelante", "ru": "быть смелым, решительным, инициативным" },
+  { "es": "andar con pies de plomo", "ru": "действовать очень осторожно; ступать крайне осмотрительно" }
+];
+
+/* ---------------------------------------------------------------------
+   1. ГЛОБАЛЬНОЕ СОСТОЯНИЕ
+   --------------------------------------------------------------------- */
+const state = {
+  allWords: [],
+  favorites: new Set(),
+  direction: 'es-ru',
+  theme: 'light',
+
+  session: {
+    currentRound: [],
+    nextRound: [],
+    total: 0,
+    learned: 0,
+    dontKnowPresses: 0,
+    roundsCount: 1,
+    startTime: null,
+    currentWord: null,
+    isFlipped: false
+  }
+};
+
+/* ---------------------------------------------------------------------
+   2. ЗАГРУЗКА СЛОВ И LOCALSTORAGE
+   --------------------------------------------------------------------- */
+
+function loadWords() {
+  // Слова берём прямо из массива WORDS_DATA выше — никакой сетевой
+  // загрузки не требуется, поэтому файл работает и при открытии
+  // напрямую (file://), без сервера.
+  state.allWords = WORDS_DATA;
+}
+
+function loadSettingsFromStorage() {
+  const favs = localStorage.getItem('esFlashcards_favorites');
+  if (favs) {
+    try { state.favorites = new Set(JSON.parse(favs)); } catch (e) { /* ignore */ }
+  }
+  const theme = localStorage.getItem('esFlashcards_theme');
+  if (theme) state.theme = theme;
+  const direction = localStorage.getItem('esFlashcards_direction');
+  if (direction) state.direction = direction;
+}
+
+function saveFavoritesToStorage() {
+  localStorage.setItem('esFlashcards_favorites', JSON.stringify([...state.favorites]));
+}
+function saveThemeToStorage() { localStorage.setItem('esFlashcards_theme', state.theme); }
+function saveDirectionToStorage() { localStorage.setItem('esFlashcards_direction', state.direction); }
+
+function toggleFavorite(esWord) {
+  if (state.favorites.has(esWord)) state.favorites.delete(esWord);
+  else state.favorites.add(esWord);
+  saveFavoritesToStorage();
+}
+
+/* ---------------------------------------------------------------------
+   3. ТЕМА / НАПРАВЛЕНИЕ ПЕРЕВОДА
+   --------------------------------------------------------------------- */
+
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', state.theme);
+  document.getElementById('themeToggle').textContent = state.theme === 'dark' ? '☀️' : '🌙';
+}
+function toggleTheme() {
+  state.theme = state.theme === 'dark' ? 'light' : 'dark';
+  applyTheme();
+  saveThemeToStorage();
+}
+
+function applyDirectionLabel() {
+  document.getElementById('directionToggle').textContent = state.direction === 'es-ru' ? 'ES → RU' : 'RU → ES';
+}
+function toggleDirection() {
+  state.direction = state.direction === 'es-ru' ? 'ru-es' : 'es-ru';
+  applyDirectionLabel();
+  saveDirectionToStorage();
+  if (state.session.currentWord) renderCardFaces();
+}
+function getCardFaces(word) {
+  if (state.direction === 'es-ru') return { front: word.es, back: word.ru };
+  return { front: word.ru, back: word.es };
+}
+
+/* ---------------------------------------------------------------------
+   4. ВКЛАДКА "СПИСОК СЛОВ"
+   --------------------------------------------------------------------- */
+
+function renderWordList(filterText = '') {
+  const tbody = document.getElementById('wordTableBody');
+  tbody.innerHTML = '';
+
+  const filtered = state.allWords.filter(w => {
+    const q = filterText.trim().toLowerCase();
+    if (!q) return true;
+    return w.es.toLowerCase().includes(q) || w.ru.toLowerCase().includes(q);
+  });
+
+  document.getElementById('wordCount').textContent = `${filtered.length} / ${state.allWords.length}`;
+
+  for (const word of filtered) {
+    const tr = document.createElement('tr');
+
+    const tdFav = document.createElement('td');
+    const favBtn = document.createElement('button');
+    favBtn.className = 'fav-toggle';
+    favBtn.textContent = state.favorites.has(word.es) ? '★' : '☆';
+    favBtn.addEventListener('click', () => {
+      toggleFavorite(word.es);
+      favBtn.textContent = state.favorites.has(word.es) ? '★' : '☆';
+      updateFavCountLabel();
+    });
+    tdFav.appendChild(favBtn);
+
+    const tdEs = document.createElement('td');
+    tdEs.textContent = word.es;
+    const tdRu = document.createElement('td');
+    tdRu.textContent = word.ru;
+
+    tr.append(tdFav, tdEs, tdRu);
+    tbody.appendChild(tr);
+  }
+}
+
+function updateFavCountLabel() {
+  document.getElementById('favCount').textContent = state.favorites.size;
+}
+
+/* ---------------------------------------------------------------------
+   5. НАСТРОЙКА СЕССИИ ОБУЧЕНИЯ
+   --------------------------------------------------------------------- */
+
+let selectedSize = 20;
+
+function setupSizeButtons() {
+  const buttons = document.querySelectorAll('.size-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedSize = btn.dataset.size === 'all' ? 'all' : parseInt(btn.dataset.size, 10);
+    });
+  });
+  buttons[0].classList.add('selected');
+}
+
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function startNewSession() {
+  if (state.sessionWordsSnapshot && state.sessionWordsSnapshot.length > 0) {
+    const sessionWords = state.sessionWordsSnapshot;
+    state.session.currentRound = [...sessionWords];
+    state.session.nextRound = [];
+    state.session.total = sessionWords.length;
+    state.session.learned = 0;
+    state.session.dontKnowPresses = 0;
+    state.session.roundsCount = 1;
+    state.session.startTime = Date.now();
+
+    showScreen('studyScreen');
+    showNextCard();
+  }
+}
+
+function repeatSameWords() {
+  const words = state.lastSessionWords || [];
+  if (words.length === 0) return;
+
+  state.session.currentRound = shuffleArray(words);
+  state.session.nextRound = [];
+  state.session.total = words.length;
+  state.session.learned = 0;
+  state.session.dontKnowPresses = 0;
+  state.session.roundsCount = 1;
+  state.session.startTime = Date.now();
+
+  showScreen('studyScreen');
+  showNextCard();
+}
+
+/* ---------------------------------------------------------------------
+   6. ОСНОВНОЙ ЦИКЛ ОБУЧЕНИЯ (очередь повторения)
+   --------------------------------------------------------------------- */
+
+function showNextCard() {
+  if (state.session.currentRound.length === 0) {
+    if (state.session.nextRound.length > 0) {
+      state.session.currentRound = shuffleArray(state.session.nextRound);
+      state.session.nextRound = [];
+      state.session.roundsCount += 1;
+    } else {
+      finishSession();
+      return;
+    }
+  }
+
+  const word = state.session.currentRound[0];
+  state.session.currentWord = word;
+  state.session.isFlipped = false;
+
+  renderCardFaces();
+  updateProgressUI();
+
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+
+function renderCardFaces() {
+  const word = state.session.currentWord;
+  if (!word) return;
+  const { front, back } = getCardFaces(word);
+  document.getElementById('frontText').textContent = front;
+  document.getElementById('backText').textContent = back;
+
+  const isFav = state.favorites.has(word.es);
+  document.getElementById('favStar').textContent = isFav ? '★' : '☆';
+  document.getElementById('favStarBack').textContent = isFav ? '★' : '☆';
+}
+
+function updateProgressUI() {
+  const { total, learned, roundsCount } = state.session;
+  document.getElementById('progressCounter').textContent = `${learned} / ${total}`;
+  const remaining = state.session.currentRound.length + state.session.nextRound.length;
+  document.getElementById('roundInfo').textContent =
+    roundsCount > 1 ? `круг ${roundsCount} · осталось ${remaining}` : `осталось ${remaining}`;
+
+  const pct = total === 0 ? 0 : Math.round((learned / total) * 100);
+  document.getElementById('progressBarFill').style.width = `${pct}%`;
+}
+
+function markKnow() {
+  if (!state.session.currentWord) return;
+  state.session.currentRound.shift();
+  state.session.learned += 1;
+  showNextCard();
+}
+
+function markDontKnow() {
+  if (!state.session.currentWord) return;
+  const word = state.session.currentRound.shift();
+  state.session.nextRound.push(word);
+  state.session.dontKnowPresses += 1;
+  showNextCard();
+}
+
+function stopSession() {
+  if (confirm('Остановить текущую сессию обучения?')) {
+    showScreen('setupScreen');
+  }
+}
+
+/* ---------------------------------------------------------------------
+   7. ПЕРЕВОРОТ КАРТОЧКИ, СВАЙПЫ, КЛАВИАТУРА
+   --------------------------------------------------------------------- */
+
+function flipCard() {
+  const flashcard = document.getElementById('flashcard');
+  state.session.isFlipped = !state.session.isFlipped;
+  flashcard.classList.toggle('flipped', state.session.isFlipped);
+}
+
+function setupCardInteractions() {
+  const flashcard = document.getElementById('flashcard');
+
+  flashcard.addEventListener('click', (e) => {
+    if (e.target.closest('.fav-star')) return;
+    flipCard();
+  });
+
+  document.getElementById('favStar').addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (state.session.currentWord) {
+      toggleFavorite(state.session.currentWord.es);
+      renderCardFaces();
+    }
+  });
+  document.getElementById('favStarBack').addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (state.session.currentWord) {
+      toggleFavorite(state.session.currentWord.es);
+      renderCardFaces();
+    }
+  });
+
+  let touchStartX = 0, touchStartY = 0;
+
+  flashcard.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  flashcard.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].screenX;
+    const touchEndY = e.changedTouches[0].screenY;
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    const SWIPE_THRESHOLD = 60;
+
+    if (Math.abs(deltaX) > SWIPE_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+      if (deltaX > 0) markKnow();
+      else markDontKnow();
+    }
+  }, { passive: true });
+}
+
+function setupKeyboardControls() {
+  document.addEventListener('keydown', (e) => {
+    const studyScreenActive = document.getElementById('studyScreen').classList.contains('active');
+    if (!studyScreenActive) return;
+    if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+    if (e.code === 'Space') { e.preventDefault(); flipCard(); }
+    else if (e.code === 'ArrowRight') { e.preventDefault(); markKnow(); }
+    else if (e.code === 'ArrowLeft') { e.preventDefault(); markDontKnow(); }
+  });
+}
+
+/* ---------------------------------------------------------------------
+   8. ЭКРАН СТАТИСТИКИ
+   --------------------------------------------------------------------- */
+
+function finishSession() {
+  state.lastSessionWords = [...(state.sessionWordsSnapshot || [])];
+
+  const elapsedMs = Date.now() - state.session.startTime;
+  const totalSeconds = Math.round(elapsedMs / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  document.getElementById('statTotal').textContent = state.session.total;
+  document.getElementById('statDontKnow').textContent = state.session.dontKnowPresses;
+  document.getElementById('statRounds').textContent = state.session.roundsCount;
+  document.getElementById('statTime').textContent = `${minutes}:${String(seconds).padStart(2, '0')}`;
+
+  showScreen('statsScreen');
+}
+
+/* ---------------------------------------------------------------------
+   ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ / ВКЛАДОК
+   --------------------------------------------------------------------- */
+
+function showScreen(screenId) {
+  document.querySelectorAll('#tab-cards .screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+}
+
+function setupTabs() {
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+    });
+  });
+}
+
+/* ---------------------------------------------------------------------
+   ИНИЦИАЛИЗАЦИЯ ПРИЛОЖЕНИЯ
+   --------------------------------------------------------------------- */
+
+function init() {
+  loadSettingsFromStorage();
+  applyTheme();
+  applyDirectionLabel();
+
+  loadWords();
+  renderWordList();
+  updateFavCountLabel();
+
+  setupTabs();
+  setupSizeButtons();
+  setupCardInteractions();
+  setupKeyboardControls();
+
+  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+  document.getElementById('directionToggle').addEventListener('click', toggleDirection);
+
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    renderWordList(e.target.value);
+  });
+
+  document.getElementById('startSessionBtn').addEventListener('click', () => {
+    const favoritesOnly = document.getElementById('favoritesOnly').checked;
+    const pool = favoritesOnly ? state.allWords.filter(w => state.favorites.has(w.es)) : state.allWords;
+
+    if (pool.length === 0) {
+      alert('Нет слов для обучения. Проверьте словарь или снимите фильтр "только избранные".');
+      return;
+    }
+
+    const shuffleOnStart = document.getElementById('shuffleOnStart').checked;
+    const size = selectedSize === 'all' ? pool.length : Math.min(selectedSize, pool.length);
+    state.sessionWordsSnapshot = (shuffleOnStart ? shuffleArray(pool) : pool).slice(0, size);
+
+    startNewSession();
+  });
+
+  document.getElementById('knowBtn').addEventListener('click', markKnow);
+  document.getElementById('dontKnowBtn').addEventListener('click', markDontKnow);
+  document.getElementById('shuffleBtn').addEventListener('click', () => {
+    state.session.currentRound = shuffleArray(state.session.currentRound);
+    showNextCard();
+  });
+  document.getElementById('stopBtn').addEventListener('click', stopSession);
+
+  document.getElementById('repeatSameBtn').addEventListener('click', repeatSameWords);
+  document.getElementById('newSessionBtn').addEventListener('click', () => showScreen('setupScreen'));
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
