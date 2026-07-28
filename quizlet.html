@@ -2,7 +2,8 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" id="themeColor" content="#eef2f0">
 <title>Іспанські слова — картки</title>
 <style>
 /* =========================================================================
@@ -62,12 +63,27 @@ html, body {
   transition: background 0.25s ease, color 0.25s ease;
 }
 
-body { min-height: 100vh; }
+/* iOS: не збільшувати текст у ландшафті і не підсвічувати тапи сірим. */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh; /* адресний рядок Safari змінює висоту — dvh коректніший */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Знімає 300 ms затримку подвійного тапу на всьому інтерактивному. */
+button, .flashcard, label { touch-action: manipulation; }
 
 .app {
   max-width: 760px;
   margin: 0 auto;
-  padding: 20px 16px 60px;
+  /* Відступи не менші за safe area: виріз і смуга Home на iPhone. */
+  padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+           calc(40px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
 }
 
 .header {
@@ -168,7 +184,8 @@ body { min-height: 100vh; }
   background: var(--surface);
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  /* 16px — менший розмір змушує Safari на iOS зумити сторінку при фокусі. */
+  font-size: 1rem;
 }
 .input:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
 
@@ -267,7 +284,15 @@ body { min-height: 100vh; }
 
 .card-stage { display: flex; justify-content: center; padding: 10px 0 28px; perspective: 1400px; }
 
-.flashcard { width: 100%; max-width: 420px; height: 260px; cursor: pointer; }
+.flashcard {
+  width: 100%;
+  max-width: 420px;
+  height: 260px;
+  cursor: pointer;
+  /* Свайп по картці не має виділяти текст. */
+  -webkit-user-select: none;
+  user-select: none;
+}
 
 .flashcard-inner {
   position: relative;
@@ -400,11 +425,124 @@ body { min-height: 100vh; }
 .result-list li .uk { color: var(--text-muted); text-align: right; }
 .result-empty { padding: 14px 16px; color: var(--text-muted); font-size: 0.9rem; }
 
-@media (max-width: 480px) {
-  .logo { font-size: 1.25rem; }
-  .card-word { font-size: 1.6rem; }
-  .flashcard { height: 220px; }
-  .stats-grid { grid-template-columns: 1fr 1fr; }
+/* =========================================================================
+   СЕНСОРНІ ПРИСТРОЇ — не залежить від ширини, тож діє і в ландшафті
+   ========================================================================= */
+.touch-hint { display: none; }
+
+@media (hover: none) and (pointer: coarse) {
+  /* Підказка про свайпи замість клавіатурної. */
+  .keyboard-hint { display: none; }
+  .touch-hint {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* Цілі дотику ≥ 44 px (Apple HIG). */
+  .btn { min-height: 44px; }
+  .btn-icon { width: 44px; height: 44px; }
+  .tab-btn { min-height: 44px; }
+  .size-btn { min-height: 52px; }
+  .checkbox-row { min-height: 44px; }
+  .checkbox-row input { width: 22px; height: 22px; }
+  .fav-toggle { width: 44px; height: 44px; font-size: 1.3rem; }
+  /* Пілюля статусу лишається компактною, але зона тапу розширена до ~45px
+     невидимим ::after — інакше по ній важко попасти пальцем. */
+  .badge { padding: 6px 10px; position: relative; }
+  .badge::after { content: ''; position: absolute; inset: -10px -8px; }
+
+  /* Збільшена зона тапу для зірочки, щоб не ловити її нігтем. */
+  .fav-star {
+    top: 4px;
+    right: 4px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  /* Наведення на тачскріні «залипає» після тапу — прибираємо ефекти. */
+  .btn-primary:hover { background: var(--teal); }
+  .btn-secondary:hover { background: var(--surface-2); }
+  .btn-ghost:hover { color: var(--text-muted); border-color: var(--border); }
+  .badge:hover { border-color: transparent; filter: none; }
+  .word-table tr:hover td { background: none; }
+}
+
+/* =========================================================================
+   ТЕЛЕФОН (iPhone 13 — 390×844 CSS px)
+   ========================================================================= */
+@media (max-width: 560px) {
+  .logo { font-size: 1.15rem; }
+  .app { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+  /* Вужча кнопка напрямку, щоб заголовок не переносився на два рядки. */
+  .header { gap: 8px; }
+  .header-controls .btn-ghost { padding: 11px 12px; font-size: 0.85rem; }
+
+  /* ---- екран навчання: картка по центру, відповіді — у зоні великого пальця ---- */
+  #studyScreen.active {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100dvh - 190px);
+  }
+  .card-stage { flex: 1; align-items: center; padding: 4px 0 16px; }
+  .flashcard { height: clamp(210px, 34dvh, 330px); }
+  .card-word { font-size: clamp(1.25rem, 5.6vw, 1.6rem); }
+  .answer-buttons { margin-top: auto; margin-bottom: 12px; gap: 10px; }
+  .btn-know, .btn-dontknow { min-height: 58px; font-size: 1.05rem; }
+  .study-toolbar { margin-bottom: 10px; }
+  .study-toolbar .btn { flex: 1; }
+
+  /* ---- список слів: рядки-картки замість тісної таблиці ---- */
+  .list-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    background: var(--bg);
+    padding: 8px 0;
+    margin: 0 0 8px;
+  }
+  .word-table thead { display: none; }
+  .word-table, .word-table tbody, .word-table tr, .word-table td { display: block; }
+  .word-table tr {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "fav es status"
+      "fav uk uk";
+    align-items: center;
+    column-gap: 8px;
+    row-gap: 2px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--border);
+  }
+  .word-table tr:first-child { border-top: none; }
+  .word-table td { padding: 0; border-top: none; }
+  .word-table td:nth-child(1) { grid-area: fav; }
+  .word-table td:nth-child(2) { grid-area: es; font-weight: 600; }
+  .word-table td:nth-child(3) { grid-area: uk; color: var(--text-muted); font-size: 0.9rem; }
+  .word-table td:nth-child(4) { grid-area: status; }
+  .word-table tr:hover td { background: none; }
+
+  /* ---- підсумки кола ---- */
+  .stats-grid { gap: 10px; margin: 16px 0 20px; }
+  .stat-card { padding: 14px 10px; }
+  .stat-value { font-size: 1.5rem; }
+  /* Списки кола довгі, тому кнопки дій піднімаємо над ними — інакше до
+     «Продовжити вивчення» треба гортати всю сторінку. */
+  #roundScreen.active { display: flex; flex-direction: column; }
+  .stats-buttons { order: 0; margin-bottom: 18px; }
+  .result-groups { order: 1; margin-bottom: 0; }
+
+  /* Вкладений скрол на телефоні незручний — хай гортається вся сторінка. */
+  .result-list { max-height: none; }
+  .result-list li { flex-direction: column; align-items: stretch; gap: 2px; }
+  .result-list li .uk { text-align: left; }
+  .result-group-header { font-size: 0.85rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -508,6 +646,7 @@ body { min-height: 100vh; }
       </div>
 
       <p class="keyboard-hint">⌨️ ← Не знаю&nbsp;&nbsp;|&nbsp;&nbsp;Пробіл — перевернути&nbsp;&nbsp;|&nbsp;&nbsp;→ Знаю</p>
+      <p class="touch-hint">👆 Тап — перевернути&nbsp;&nbsp;|&nbsp;&nbsp;свайп ← не знаю&nbsp;&nbsp;|&nbsp;&nbsp;свайп → знаю</p>
     </div>
 
     <div id="roundScreen" class="screen">
@@ -842,6 +981,8 @@ function toggleFavorite(esWord) {
 function applyTheme() {
   document.documentElement.setAttribute('data-theme', state.theme);
   document.getElementById('themeToggle').textContent = state.theme === 'dark' ? '☀️' : '🌙';
+  // Safari на iOS фарбує свою панель у theme-color — тримаємо його в темі.
+  document.getElementById('themeColor').content = state.theme === 'dark' ? '#10161a' : '#eef2f0';
 }
 function toggleTheme() {
   state.theme = state.theme === 'dark' ? 'light' : 'dark';
